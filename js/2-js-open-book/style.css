@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  /* 将容器声明成IE模型*/
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font: 100%/1.25 Helvetica, arial, sans-serif;
+  perspective: 1000px;
+  background-color: #444;
+  background-image: linear-gradient(to bottom, #444, #999);
+}
+
+.p3d {
+  transform-style: preserve-3d;
+}
+
+.book {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  /* 谷歌兼容 */
+  -webkit-transform: rotateX(60deg);
+  color: #fff;
+  /* 用户无法选中文字 */
+  user-select: none;
+}
+
+.front-cover {
+  cursor: move;
+  transform-origin: 0 50%;
+  transform: rotateY(0deg);
+}
+
+.page {
+  width: 300px;
+  height: 300px;
+  padding: 1em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-indent: 2em;
+}
+
+.inside {
+  background-color: #d93e2b;
+
+}
+
+.outside {
+  background: #fff;
+}
+
+.front-cover .outside {
+  background-image: url('https://img.zcool.cn/community/015827587c22bea801219c77a7517d.jpg@1280w_1l_2o_100sh.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: translateZ(3px);
+}
+
+.flip {
+  transform: rotateY(180deg);
+}
+
+.back-cover .outside {
+  transform: translateZ(-3px);
+}
+
+.back-cover .inside {
+  background-color: #d93e2b;
+}
+
+.card,
+.shadow {
+  width: 196px;
+  height: 132px;
+  position: absolute;
+  left: 60px;
+  top: 60px;
+  transform-origin: 0 100%;
+}
+
+.shadow {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.card {
+  background: url('https://ts1.cn.mm.bing.net/th/id/R-C.26d37f0b6dce959a2d8cdfecec1bedfb?rik=fPX58%2f%2fUGuAkuA&riu=http%3a%2f%2fseopic.699pic.com%2fphoto%2f50007%2f4775.jpg_wh1200.jpg&ehk=FmklOtkC25zdVyrS2yMQCF3lw%2fFnD1XzOBNF19yOy48%3d&risl=&pid=ImgRaw&r=0')no-repeat;
+  background-size: cover;
+}
