@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // JS强大的表现力 语言精髓 对象
+    const dante = {
+      name: 'Dante',
+      age: 21,
+      hometown: '江西九江',
+      isSingle: true
+    }
+    // 送花 情商 码商
+    // 对象本质：属性 + 方法
+    const zlf = {
+      name: 'zlf',
+      age: 22,
+      hometown: '江西九江',
+      isSingle: true,
+      sendFlower(receive) {
+        receive.receiveFlower(this)
+      }
+    }
+    const xm = {
+      name: 'xm',
+      age: 20,
+      hometown: '江西南昌',
+      emotion: 50,
+      receiveFlower(send) {
+        if (this.emotion < 80) {
+          console.log("本宫没心情，打出去");
+        } else {
+          console.log(`${this.name}收到${send.name}花了`)
+          console.log("万达走一波");
+        }
+      }
+    }
+    //代理模式
+    const xh = {
+      name: 'xh',
+      hometown: '江西南昌',
+      // method 接口 interface
+      receiveFlower(send) {
+        // console.log(`收到${send.name}花了`)
+        // if(send.name === 'zlf'){
+        //   console.log('');
+        // }
+        if (xm.emotion >= 80) {
+          xm.receiveFlower(send)
+        } else {
+          setTimeout(()=> {
+            xm.emotion = 99
+            xm.receiveFlower(send)
+          }, 2000)
+        }
+
+      }
+    }
+  </script>
+</body>
+
+</html>
