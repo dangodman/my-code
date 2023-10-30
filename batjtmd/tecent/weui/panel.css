@@ -1,0 +1,109 @@
+.weui-panel {
+  background-color: var(--weui-8G-2);
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 第一个 没必要mt
+其余的会和前面胡panel mt */
+.weui-panel:first-child {
+  margin-top: 0px;
+}
+
+.weui-panel__hd {
+  padding: 16px 16px 13px;
+  color: var(--weui-FG-0);
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+}
+
+.weui-media-box {
+  padding: 16px;
+  position: relative;
+}
+
+.weui-media-box_appmsg {
+  display: flex;
+  align-items: center;
+}
+
+.weui-media-box__hd {
+  margin-right: 16px;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+
+.weui-media-box__hd::after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--weui-FG-3);
+  color: rgba(0, 0, 0, 0.1);
+  color: var(--weui-FG-3);
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  left: 15px;
+}
+
+.weui-media-box__hd img {
+  width: 60px;
+  height: 60px;
+}
+.weui-media-box::before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid var(--weui-FG-3);
+  color: rgba(0,0,0,0.1);
+  color: var(--weui-FG-3);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  left: 16px;
+}
+.weui-media-box__bd {
+  flex: 1;
+}
+
+.weui-media-box__title {
+  display: block;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--weui-FG-0);
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.weui-media-box__desc {
+  color: rgba(0, 0, 0, 0.3);
+  color: var(--weui-FG-2);
+  font-size: 14px;
+  line-height: 1.4;
+  padding-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
