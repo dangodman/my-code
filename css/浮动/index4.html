@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    ul li {
+      list-style: none;
+      width: 200px;
+      height: 100px;
+      float: left;
+    }
+    li:nth-child(1){
+      background: red;
+    }
+    li:nth-child(2){
+      background: blue;
+    }
+    li:nth-child(3){
+      background: yellow;
+    }
+    .text{
+      width: 100px;
+      height: 150px;
+      background: green;
+    }
+    /* .clear{
+      clear:both;
+    } */
+    .clear::after{
+      content:'';
+      clear:both;
+      display: block;
+    }
+    ul {
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <ul class="clear">
+      <li></li>
+      <li></li>
+      <li></li>
+      <!-- <div class="clear"></div> -->
+    </ul>
+    <div class="text">hello world</div>
+  </div>
+</body>
+</html>
