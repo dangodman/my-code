@@ -1,5 +1,5 @@
 function foo() {
-  var myName = '旭旭'
+  var myName = 'dante'
   let test1 = 1
   let test2 = 2
   var innerBar = {
@@ -14,5 +14,5 @@ function foo() {
   return innerBar
 }
 var bar = foo()
-bar.setName('浪哥')
+bar.setName('杰伦')
 console.log(bar.getName())

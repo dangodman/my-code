@@ -1,8 +1,8 @@
 showName()
 console.log(myName); //undefined
 
-var myName = "王艺杰"
+var myName = "dante"
 
 function showName(){
-  console.log('杰哥'); //杰哥
+  console.log('周杰伦'); //周杰伦
 }
