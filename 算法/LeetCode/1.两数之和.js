@@ -14,4 +14,4 @@ var twoSum = function (nums, target) {
     }
   }
 };
-console.log(twoSum(nums, target));
+console.log(twoSum(nums, target))
