@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防抖</title>
+</head>
+
+<body>
+  <button id="btn">提交</button>
+  <script>
+    const btn = document.getElementById("btn")
+    function send(e,a,b,c) {
+      console.log(this,'提交完成',e);
+    }
+    btn.addEventListener("click", debounce(send, 1000))
+
+
+// 闭包 防抖函数
+    function debounce(fn, delay) {
+      let timer
+      // let _this = this
+      return function () {
+        let args = arguments
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+          fn.call(this,...args)
+        }, delay)
+
+      }
+    }
+  </script>
+</body>
+
+</html>
