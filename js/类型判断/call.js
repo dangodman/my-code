@@ -7,7 +7,7 @@ function foo() {
 
 // foo.call(obj)
 
-Function.prototype.myCall = function (context, ...arguments) {
+Function.prototype.myCall = function (context,...arguments) {
   if (!this instanceof Function) {
     throw new TypeError('myCall is not a function')
   }
