@@ -12,5 +12,6 @@ function Person(){
 let p1 = new Person()
 let p2 = new Person()
 
+console.log(p1);
 console.log(p1.say())
 

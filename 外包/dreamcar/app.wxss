@@ -1,0 +1,5 @@
+/**app.wxss**/
+.hero{
+  background: green;
+  color:#fff;
+}
