@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/cars/cars"
+    "pages/cars/cars",
+    "pages/vehicles/show"
   ],
   "window": {
     "backgroundTextStyle": "light",
