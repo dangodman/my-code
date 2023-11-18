@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录</title>
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./toast.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_4336207_yrnpz6x4ql.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <div class="back">
+      <i class="iconfont icon-xiangzuojiantou"></i>
+    </div>
+    <div class="center">
+      <img src="./logo.png" alt="">
+      <span>网易云音乐</span>
+    </div>
+  </div>
+  <div class="login">
+    <div class="input-group">
+      <input type="email" name="email" placeholder="登录邮箱" id="email">
+    </div>
+    <div class="input-group">
+      <input type="password" name="password" placeholder="密码" id="password">
+    </div>
+    <button type="submit">登录</button>
+    <div class="reset">重设密码</div>
+  </div>
+  <script>
+    const btn = document.querySelector('button')
+    btn.addEventListener('click', login)
+    function login() {
+      let  username = document.querySelector('#email').value
+      let  password = document.querySelector('#password').value
+      if (email === '' || password === '') {
+        Toast('请输入邮箱和密码')
+        return
+      }
+      axios.get(`http://192.168.31.45:3000/login?username=${username}&password=${password}`
+      ).then(res => {
+        // console.log(res)
+        if (res.status === 200) {
+          Toast(res.data.message)
+        }
+      })
+    }
+    function Toast(message) {
+      const toast = document.createElement('div')
+      toast.className = 'toast'
+      toast.innerHTML = `
+          <div class="toast-text">${message}</div>
+      `
+      document.body.appendChild(toast)
+      setTimeout(() => {
+        toast.remove()
+      }, 1000)
+    }
+  </script>
+</body>
+
+</html>
