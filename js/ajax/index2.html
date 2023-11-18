@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">新歌速递</button>
+  <ul>
+  </ul>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    const btn = document.getElementById("btn")
+    btn.addEventListener("click", () => {
+      // 朝网易云的服务器的后端代码发一个http请求
+      $.ajax({
+        url:'http://192.168.31.45:3000/top/song?type=7',
+        type: "get",
+        dataType: "json",
+        success: function (res) {
+          console.log(res)
+          // 成功的回调函数
+          // 1. 先把ul标签清空
+          // 2. 遍历res.data，把每一首歌的标题和歌手放到ul标签中
+          let ul = document.querySelector("ul")
+          ul.innerHTML = ""
+          res.data.forEach(item => {
+            let li = document.createElement("li")
+            li.innerHTML =item.name 
+            ul.appendChild(li)
+          })
+        }
+      })
+      btn.style.display = "none"
+    })
+  </script>
+</body>
+
+</html>
