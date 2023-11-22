@@ -17,7 +17,7 @@ let date = new Date()
 // console.log(arr instanceof Array)    // true
 // console.log(fn instanceof Function)  // true
 // console.log(date instanceof Date)    // true
-
+//  console.log(arr instanceof Object);  //true
 // // 无法判断原始类型
 // console.log(str instanceof String)   // false
 
