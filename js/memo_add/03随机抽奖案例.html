@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <strong>抽奖活动</strong>
+    <h1>一等奖：<span id="one">???</span></h1>
+    <h3>二等奖：<span id="two">???</span></h3>
+    <h5>三等奖：<span id="three">???</span></h5>
+    <button id="btn">抽奖</button>
+
+
+    <script>
+        const btn = document.getElementById("btn")
+        btn.addEventListener('click', choujiang)
+        function choujiang() {
+            const personArr = ['蔡徐坤', '刘德华', '法外狂徒张三', '高启强', '安欣']
+
+            //一等奖
+            const random1 = Math.floor(Math.random() * personArr.length) //随机数，获取数组下标
+            const one = document.querySelector('#one') //获取一等奖元素
+            one.innerHTML = personArr[random1] //修改内容
+            personArr.splice(random1, 1)  // 删除
+
+            //二等奖
+            const random2 = Math.floor(Math.random() * personArr.length)
+            const two = document.querySelector('#two')
+            two.innerHTML = personArr[random2]
+            personArr.splice(random2, 1)
+
+            //三等奖
+            const random3 = Math.floor(Math.random() * personArr.length)
+            const three = document.querySelector('#three')
+            three.innerHTML = personArr[random3]
+        }
+    </script>
+</body>
+
+</html>
