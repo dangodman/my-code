@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    img {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <template id="my-app">
+    <h2 v-text="msg"></h2>
+    <img :src="imgUrl"  alt="">
+    <a :href="link">百度一下</a>
+  </template>
+  <script>
+    const App = {
+      template:'#my-app',
+      data() {
+        return {
+          msg: 'hello world',
+          imgUrl:'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png',
+          link:'https://www.baidu.com'
+        }
+      }
+    }
+    Vue.createApp(App).mount('#app')
+  </script>
+</body>
+</html>

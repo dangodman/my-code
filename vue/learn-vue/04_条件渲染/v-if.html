@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <template id="my-app">
+    <h2 v-if="count === 1">hello world</h2>
+    <h2 v-else-if="count === 2">こんにちは</h2>
+    <h2 v-else>你好世界</h2>
+    <button @click="changeCount">切换</button>
+  </template>
+  <script>
+    const App = {
+      template:'#my-app',
+      data() {
+        return {
+         isShow:true,
+         count:0
+        }
+      },
+      methods:{
+        changeCount(){
+          if(this.count > 2){
+            this.count = 0
+          }
+          this.count ++
+        }
+      }
+    }
+    Vue.createApp(App).mount('#app')
+  </script>
+</body>
+</html>
