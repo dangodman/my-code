@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <template id="my-app">
+    <h2>歌曲列表</h2>
+    <ul>
+      <li v-for="(item,index) in songs" :key="index">
+        {{index + 1}} ---- {{item}}
+        <a href="#" @click="del">删除</a>
+      </li>
+    </ul>
+  </template>
+  <script>
+    const App = {
+      template:'#my-app',
+      data() {
+        return {
+          songs:[
+            '等你下课',
+            '不能说的秘密',
+            '说好不哭',
+            '晴天',
+            '告白气球'
+          ]
+        }
+      },
+      methods:{
+        del(index){
+          this.songs.splice(index,1)
+        }
+      }
+    }
+    Vue.createApp(App).mount('#app')
+  </script>
+</body>
+</html>
