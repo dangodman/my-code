@@ -11,7 +11,7 @@
             <el-dropdown-menu>
               <el-dropdown-item>修改密码</el-dropdown-item>
               <el-dropdown-item>个人详情</el-dropdown-item>
-              <el-dropdown-item>退出登录</el-dropdown-item>
+              <el-dropdown-item @click="$router.push('/')">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -52,6 +52,12 @@ export default {
         font-size: 24px;
       }
 
+    }
+    .el-aside{
+      background-color: aqua;
+    }
+    .el-main{
+      background-color: white;
     }
   }
 }
