@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // ? 查询字符串 query string -> 后台的
+    // js parse url  得到params URL中的参数 
+    // {user:'阿飞',age:17}
+    // function getParams(url){
+    //   const res = {}
+    //   if(url.indexOf('?')!== -1){
+    //     const str = url.split('?')[1]
+    //     if(str){
+    //       const arr = str.split('&')
+    //       arr.forEach(item => {
+    //         // const arr2 = item.split('=')
+    //         // res[arr2[0]] = decodeURIComponent(arr2[1])
+    //         const [key,val] = item.split('=')
+    //         res[key] = decodeURIComponent(val)
+    //       })
+    //     }
+    //   }
+    //   return res 
+    // }
+    //  get 编码url 
+    // const user = getParams('http://www.baidu.com?user=%E9%98%BF%E9%A3%9E&age=16')
+    // console.log(user)
+    const urlSearchParmas = new URLSearchParams('?user=%E9%98%BF%E9%A3%9E&age=16')
+    console.log(urlSearchParmas.entries().next())
+    const params = Object.fromEntries(urlSearchParmas.entries())
+    console.log(params)
+  </script>
+</body>
+</html>
