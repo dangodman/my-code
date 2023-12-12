@@ -1,34 +1,62 @@
 <template>
-  <div class="header">
+  <div class="header" @click="showDetail">
     <div class="content-wrapper">
       <div class="avatar">
-        <img src="http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg" alt="">
+        <img :src="seller.avatar ? seller.avatar: ''" alt="">
       </div>
       <div class="content">
         <div class="title">
           <span class="brand"></span>
-          <span class="name">店铺名称</span>
+          <span class="name">{{ seller.name }}</span>
         </div>
-        <div class="description">蜂鸟专送/38分钟送达</div>
-        <div class="support">
+        <div class="description">{{ seller.description }}/{{ seller.deliveryTime }}分钟送达</div>
+        <div class="support" v-if="seller.supports">
           <!--  -->
-          <span class="text">在线支付满28减5</span>
+          <SupportIcon :size="1" :type="seller.supports[0].type" />
+          <span class="text">{{ seller.supports[0].description }}</span>
         </div>
       </div>
-      <div class="support-count">
-        <span class="count">5个</span>
-        <i class="iconfont">></i>
+      <div class="support-count" v-if="seller.supports">
+        <span class="count">{{ seller.supports.length }}</span>
+        <i class="iconfont icon-youjiantou"></i>
       </div>
     </div>
-    <div class="bulletin-wrapper"></div>
+    <div class="bulletin-wrapper">
+      <span class="bulletin-title"></span>
+      <span class="bulletin-text">{{ seller.bulletin }}</span>
+      <i class="iconfont icon-youjiantou"></i>
+    </div>
+    <div class="bg" :style="`background-image: url(${seller.avatar ? seller.avatar : ''});`"></div>
+    <HeaderDetail v-show="detailShow" @hide="handle" :detailData="seller" />
   </div>
 </template>
 
 <script>
+import SupportIcon from '@/components/support-icon/SupportIcon.vue'
+import HeaderDetail from '@/components/header-detail/HeaderDetail.vue'
 export default {
-  data() {
+  components: {
+    SupportIcon,
+    HeaderDetail
+  },
+  data(){
     return {
-
+      detailShow:false
+    }
+  },
+  props: {
+    seller: {
+      type: Object,
+      default: () => { }
+    }
+  },
+  methods:{
+    showDetail(){
+      this.detailShow = true
+    },
+    handle(val){
+      console.log('子组件发布了一个事件hide，值为:'+ val);
+      this.detailShow = val
     }
   }
 }
@@ -37,13 +65,16 @@ export default {
 <style lang="less" scoped>
 @import '@/common/style/variable.less';
 @import '@/common/style/mixin.less';
+
 .header {
   background: @color-background-ss;
+  position: relative;
 
   .content-wrapper {
     display: flex;
     padding: 24px 12px 18px 24px;
     position: relative;
+
     .avatar {
       width: 64px;
       height: 64px;
@@ -57,33 +88,40 @@ export default {
     .content {
       flex: 1;
       margin-left: 16px;
-      color:@color-white;
-      .title{
+      color: @color-white;
+
+      .title {
         display: flex;
         align-items: center;
         margin-bottom: 8px;
-       .brand{
-        width: 30px;
-        height: 18px;
-        // background-image: url('./image/brand@2x.png');
-        .bg-image('./image/brand');
-        background-size: cover;
-       } 
-       .name{
-        margin-left: 6px;
-        font-style: @fontsize-large;
-        font-weight: bold;
-       }
+
+        .brand {
+          width: 30px;
+          height: 18px;
+          // background-image: url('./image/brand@2x.png');
+          .bg-image('./image/brand');
+          background-size: cover;
+        }
+
+        .name {
+          margin-left: 6px;
+          font-style: @fontsize-large;
+          font-weight: bold;
+        }
       }
-      .description{
+
+      .description {
         font-size: @fontsize-small;
         margin-bottom: 8px;
       }
-      .support{
+
+      .support {
         display: flex;
         align-items: center;
-        .text{
+
+        .text {
           font-size: @fontsize-small-s;
+          margin-left: 4px;
         }
       }
     }
@@ -99,15 +137,58 @@ export default {
       border-radius: 14px;
       display: flex;
       align-items: center;
-      color:@color-white;
-      .count{
+      color: @color-white;
+
+      .count {
         font-size: @fontsize-small-s;
 
       }
-      .iconfont{
+
+      .iconfont {
         font-size: @fontsize-small-s;
         margin-left: 2px;
       }
     }
+  }
+
+  .bulletin-wrapper {
+    display: flex;
+    height: 28px;
+    padding: 0 8px;
+    background-color: @color-background-sss;
+    align-items: center;
+    color: @color-white;
+
+    .bulletin-title {
+      flex: 0 0 22px;
+      height: 12px;
+      .bg-image('./image/bulletin');
+      background-size: 100% 100%;
+    }
+
+    .bulletin-text {
+      flex: 1;
+      margin-left: 4px;
+      font-size: @fontsize-small-s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .icon-youjiantou {
+      flex: 0 0 10px;
+      font-size: @fontsize-small-s;
+    }
+  }
+
+  .bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-size: 100% 100%;
+    z-index: -1;
+    filter: blur(10px);
   }
 }</style>
