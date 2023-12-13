@@ -6,11 +6,11 @@
           <div class="detail-main">
             <h1 class="name">{{ detailData.name }}</h1>
             <div class="star">
-              <span class="star-item on"></span>
-              <span class="star-item on"></span>
-              <span class="star-item on"></span>
-              <span class="star-item on"></span>
-              <span class="star-item off"></span>
+              <span class="star-item " :class="startList[0]"></span>
+              <span class="star-item " :class="startList[1]"></span>
+              <span class="star-item " :class="startList[2]"></span>
+              <span class="star-item " :class="startList[3]"></span>
+              <span class="star-item " :class="startList[4]"></span>
             </div>
             <div class="title">
               <div class="line"></div>
@@ -19,7 +19,7 @@
             </div>
             <ul class="supports" v-for="item in detailData.supports">
               <li class="support-item">
-                <SupportIcon :size="1" :type="item.type"  />
+                <SupportIcon :size="1" :type="item.type" />
                 <span class="text">{{ item.description }}</span>
               </li>
 
@@ -48,7 +48,7 @@ export default {
   },
   data() {
     return {
-
+     
     }
   },
   props: {
@@ -60,6 +60,16 @@ export default {
   methods: {
     hideDetail() { //子父组件通讯
       this.$emit('hide', false) // 创建一个hide事件
+    },
+  },
+  computed: {
+    startList() {
+      let score = Math.round(this.detailData.score)
+      let list = new Array(5).fill('off');
+      for (let i = 0; i < score; i++) {
+        list[i] = 'on';
+      }
+      return list;
     }
   }
 }
@@ -77,6 +87,7 @@ export default {
   background: @color-background-s;
   color: @color-white;
   backdrop-filter: blur(10px); // 底层虚化
+  z-index:999;
 
   &.fade-enter-from,
   &.fade-leave-to {
@@ -92,6 +103,7 @@ export default {
   .detail-wrapper {
     margin-top: 64px;
     padding-bottom: 64px;
+
     .name {
       font-size: @fontsize-large;
       text-align: center;
@@ -99,23 +111,26 @@ export default {
     }
 
     .star {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     margin-top: 18px;
-     padding: 2px 0;
-     .star-item{
-      width: 20px;
-      height: 20px;
-      background-size: 20px 20px;
-      margin-right: 22px;
-      &.on{
-       background-image: url('@/assets/images/star-on.png');
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 18px;
+      padding: 2px 0;
+
+      .star-item {
+        width: 20px;
+        height: 20px;
+        background-size: 20px 20px;
+        margin-right: 22px;
+
+        &.on {
+          background-image: url('@/assets/images/star-on.png');
+        }
+
+        &.off {
+          background-image: url('@/assets/images/star-off.png');
+        }
       }
-      &.off{
-        background-image: url('@/assets/images/star-off.png');
-      }
-     }
     }
 
     .title {
@@ -146,17 +161,20 @@ export default {
         align-items: center;
         margin-bottom: 12px;
         padding: 0 12px;
-        .text{
+
+        .text {
           margin-left: 4px;
           font-size: @fontsize-small;
           line-height: 16px;
         }
       }
     }
-    .bulletin{
+
+    .bulletin {
       margin: 0 auto;
       width: 80%;
-      .content{
+
+      .content {
         font-size: @fontsize-small;
         line-height: 24px;
         padding: 0 12px;
@@ -174,5 +192,4 @@ export default {
     text-align: center;
     line-height: 30px;
   }
-}
-</style>
+}</style>
