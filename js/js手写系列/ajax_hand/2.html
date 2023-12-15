@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  let template = '我是{{name}},年龄{{age}},性别{{sex}}'
+  let person = {
+    name:'pluto',
+    age:18,
+    sex:'男'
+  }
+  console.log(render(template, person))
+  function render(template,data){
+    // ()在reg特定字符 在这里我们事项匹配{}本身 转义
+    // \d 代表数字 \w 单词  \w+ 一个或多个
+    // (\w+) 表示分组  () 拿出来
+    const reg = /\{\{(\w+)\}\}/
+    if(reg.test(template)){
+      console.log('有的',reg.exec(template))
+      const name = reg.exec(template)[1]
+      template = template.replace(reg,data[name])
+      return render(template,data)
+    }
+    return template
+    // for(let key in data){
+    //   let reg = new RegExp('{{'+key+'}}','g')
+    //   template = template.replace(reg,data[key])
+    // }
+    // console.log(template)
+  }
+</script>
+</body>
+</html>

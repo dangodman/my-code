@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajax业务流程封装</title>
+</head>
+<body>
+<script>
+  // 返回promise对象的函数
+  // promise then 是微任务 
+  function getDataByAjax(url){
+    // Promise 是 es6 提供的一个类 实例化的时候 立即执行传给它的执行器
+    // executor 同步
+    return new Promise((resolve,reject) => {
+      console.log('1111')
+      // 异步任务的容器
+      // 浏览器的兼容性 ie低版本不支持XMLHttpRequest
+      const xhr = XMLHttpRequest ? new XMLHttpRequest() :new ActiveXObject("Microsoft.XMLHTTP")
+      // 打开主动请求数据
+      console.log(xhr.readyState) // 0
+      xhr.open('GET',url,false)
+      console.log(xhr.readyState) // 1 http 请求通道打开
+
+      // 2 开始传输  3 正在传输 还未完成    
+      xhr.onreadystatechange =function(){ 
+        console.log(xhr.readyState)
+        if(xhr.readyState !== 4) return // 4 完成所有数据的传输
+        // 304 Not Modified 性能优化 服务器端资源 在多次请求中并没有改变 (update_time 文件) 304 响应头 不传输响应体
+        // 前端 304 怎么办？ 前端会去浏览器缓存里拿之间的结果
+        // 协商缓存 
+        if(xhr.status === 200 || xhr.status === 304){
+          resolve(xhr.responseText)
+        }else{
+          reject(xhr.responseText)
+        }
+      }
+      xhr.send()
+      console.log(xhr.readyState)
+    })
+  }
+  (async function(){
+    const p = getDataByAjax('https://api.github.com/users/dangodman/repos')
+    console.log(p) // pending状态
+    //  await 后面是一个promise对象
+    try{
+      const data = await p   // 卡在这里 两秒钟 
+      console.log(p) // fullfilled 状态
+      console.log(data)
+    }catch(err){
+      console.log(err)
+    }
+  })()
+</script>
+</body>
+</html>
