@@ -1,7 +1,9 @@
 import {ref} from 'vue'
 import {Planet, Music, VideoOne, Fm, Like, Computer, DownloadThree, PlayTwo} from '@icon-park/vue-next'
+import {useRouter} from 'vue-router'
 export function useMenu(){
   const currentKey = ref('discover')
+  const router = useRouter()
   const menus = [
     {
       name: "在线音乐",
