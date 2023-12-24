@@ -32,4 +32,7 @@ function ispalindrome(s) {
   return true
 }
 console.log(ispalindrome(str3))
+console.log(ispalindrome(str3))
+console.log(ispalindrome(str3))
+console.log(ispalindrome(str3))
 
