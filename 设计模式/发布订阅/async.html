@@ -1,0 +1,18 @@
+<script>
+  let finish = new CustomEvent('finish',{detail:{name:'finish'},bubbles:true,cancelable:false})
+  function fnA(){
+    setTimeout(()=>{
+      console.log('请求a完成')
+      window.dispatchEvent(finish)
+    },1000)
+  }
+  function fnB(){
+    setTimeout(()=>{
+      console.log('请求b完成')
+    },500)
+  }
+  fnA()
+  window.addEventListener('finish',()=>{
+    fnB()
+  })
+</script>
