@@ -28,6 +28,7 @@
 </template>
 
 <script setup>
+import axios from '../api';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter()
@@ -37,12 +38,20 @@ const state = reactive({
   password: ''
 })
 
-const onSubmit = () => {
+const onSubmit = async () => {
   // 发请求，将state.username和state.password传给后端
-  console.log(state.username,state.password)
+  try {
+    const res = await axios.post('/register', { username: state.username, password: state.password, nickname: state.nickname })
+    console.log(res)
+    if (res.code === '8000') {
+      router.push('/login')
+    }
+  } catch (err) {
+    console.log(err)
+  }
 }
 const login = () => {
-  // 跳转到注册页面
+  // 跳转到登录页面
   router.push('/login')
 }
 

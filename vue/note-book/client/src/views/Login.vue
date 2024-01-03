@@ -28,15 +28,24 @@
 <script setup>
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from '../api'
 const router = useRouter()
 const state = reactive({
   username: '',
   password: ''
 })
 
-const onSubmit = () => {
+const onSubmit = async () => {
   // 发请求，将state.username和state.password传给后端
-  console.log(state.username,state.password)
+  try {
+    const res = await axios.post('/login', { username: state.username, password: state.password })
+    console.log(res)
+    // 保存用户信息
+    sessionStorage.setItem('userInfo', JSON.stringify(res.data))
+    router.push('/noteClass')
+  } catch (err) {
+    console.log(err)
+  }
 }
 const register = () => {
   // 跳转到注册页面
