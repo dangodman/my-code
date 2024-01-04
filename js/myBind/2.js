@@ -4,7 +4,7 @@ Function.prototype.myCall = function(context, ...arguments){
   }
   context = context || window;
   context.fn = this
-  let args = [...arguments].slice(1)
+  let args = [...arguments]
   return context.fn(...args)
 }
 
