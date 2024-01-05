@@ -15,7 +15,7 @@ function curry(fn){
     //  返回函数 继续收集参数 
     return (...arg) => judge(...args,...arg)
   }
-  return judge 
+  return judge  
 }
 
 // 有时候不会一次性给到，前端的交互
@@ -24,4 +24,4 @@ function curry(fn){
 console.log(add.length)
 // add(1)(2)(3)
 const curryAdd = curry(add)
-console.log(curryAdd(1)(2,3))
+console.log(curryAdd(1)(2,3)) 
