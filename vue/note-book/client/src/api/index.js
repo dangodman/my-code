@@ -1,7 +1,6 @@
 // 封装axios
 import axios from "axios";
 import { showFailToast } from "vant";
-import "vant/es/toast/style";
 
 axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.headers.post["Content-Type"] = "application/json";

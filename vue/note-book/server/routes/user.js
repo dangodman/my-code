@@ -48,6 +48,12 @@ router.post("/register", async (ctx) => {
   // 在数据库中校验 username 是否存在 如果不存在
   // 在数据库中植入一条新的数据
   const { username, password, nickname } = ctx.request.body;
+  if(!username || !password || !nickname){
+    ctx.body = {
+      code:'8001',
+      msg:'账号密码或昵称不能为空'
+    }
+  }
   try {
     const res = await userExist(username);
     if (res.length) {
