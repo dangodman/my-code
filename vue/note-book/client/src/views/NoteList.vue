@@ -1,59 +1,54 @@
 <template>
   <div class="note-list">
-    <ul>
-      <li>
+    <ul v-if="list.data.length">
+      <li v-for="item in list.data" @click="goNoteDetail(item.id)">
         <div class="img">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM2pG4vPcektrcdvV-bDDNxvLXmhxKWhjxbKQWP8fQ82mBFZFGbZtS0ZfdfA&s"
-            alt=""
-          />
+          <img :src="item.head_img" alt="" />
         </div>
-        <p class="time">2023/05/20</p>
-        <p class="title">今天去吃了猪脚饭了吃饭了吃猪脚了</p>
-      </li>
-      <li>
-        <div class="img">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM2pG4vPcektrcdvV-bDDNxvLXmhxKWhjxbKQWP8fQ82mBFZFGbZtS0ZfdfA&s"
-            alt=""
-          />
-        </div>
-        <p class="time">2023/05/20</p>
-        <p class="title">今天去吃了猪脚饭</p>
-      </li>
-      <li>
-        <div class="img">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM2pG4vPcektrcdvV-bDDNxvLXmhxKWhjxbKQWP8fQ82mBFZFGbZtS0ZfdfA&s"
-            alt=""
-          />
-        </div>
-        <p class="time">2023/05/20</p>
-        <p class="title">今天去吃了猪脚饭</p>
+        <p class="time">{{ item.c_time }}</p>
+        <p class="title">{{ item.title }}</p>
       </li>
     </ul>
+    <p class="empty" v-else>当前分类下还没有文章哦</p>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-onMounted(() => {
-  // 页面加载完毕中发请求拿到当前分类的数据
+import { onMounted, reactive } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import axios from "../api";
+const router = useRouter(); // 路由实例
+const route = useRoute(); // 当前路由详情
+const list = reactive({
+  data: [],
 });
+onMounted(async () => {
+  // 页面加载完毕中发请求拿到当前分类的数据
+  const { data } = await axios.post("/findNoteListByType", {
+    note_type: route.query.title,
+  });
+  console.log(data);
+  list.data = data;
+});
+const goNoteDetail = (id) => {
+  router.push({ path: "/noteDetail", query: { id } });
+};
 </script>
 
 <style lang="less" scoped>
 .note-list {
   width: 100%;
   padding: 1rem 0.667rem 0;
+  box-sizing: border-box;
   ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 50px;
-    grid-row-gap: 30px;
+    grid-column-gap: 30px;
+    grid-row-gap: 50px;
     li {
       img {
         width: 100%;
+        height: 4rem;
         border-radius: 0.27rem;
       }
       .time {
