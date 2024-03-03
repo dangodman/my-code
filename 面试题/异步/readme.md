@@ -14,3 +14,8 @@
 2. promise: 
    1. 维护了一个状态，state，值为: pending fulfilled rejected, 目的是上promise的状态一经改变，无法再次修改，也就保证了 then和catch不可能同时触发
    2. 内部的resolve函数会修改state为fulfilled，并触发then中的回调
+3. then:
+  1. 默认 返回一个promise对象，状态为fulfilled
+  2. 当then前面的promise状态为fulfilled，then中的回调直接执行
+     当then前面的promise状态为rejected，then中的第二个回调直接执行
+     当then前面的promise状态为pending，then中的回调需要被缓存起来交给resolve或者reject执行

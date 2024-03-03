@@ -18,3 +18,5 @@ a().then((res) => {
   console.log(res);
   b()
 })
+
+
