@@ -92,11 +92,70 @@ class MyPromise {
       resolve()
     })
   }
+
+  static all(promises) {
+    return new MyPromise((resolve,reject) => {
+      let values = [],count = 0
+      for(let i = 0; i < promises.length; i++) {
+        promises[i].then((value) => {
+          count++
+          values[i] = value
+          if(count === promises.length) {
+            resolve(values)
+          }
+        },
+        (reason) => {
+          reject(reason)
+        })
+      }
+    })
+  }
+  static any(promises) {
+    return new MyPromise((resolve,reject) => {
+      let count = 0,errors = []
+      for(let i = 0;i<promises.length;i++) {
+        promises[i].then((value) => {
+          resolve(value)
+        },
+        (reason) => {
+          count++
+          errors[i] = reason
+          if(count === promises.length) {
+            reject(new AggregateError(errors))
+          }
+        }
+        )
+      }
+    })
+  }
 }
 
 
-let p = new MyPromise((resolve,reject) => {
-  // resolve('1')
+// let p = new MyPromise((resolve,reject) => {
+//  // resolve('1')
+// })
+// p.then()
+// console.log(p);
+
+
+function a() {
+  return new Promise((resolve,reject) => {
+    setTimeout(() => {
+      console.log('a')
+      resolve('a')
+    },1000)
+  })
+}
+
+function b() {
+  return new Promise((resolve,reject) => {
+    setTimeout(() => {
+      console.log('b')
+      resolve('b')
+    },500)
+  })
+}
+
+MyPromise.all([a(),b()]).then((res) => {
+  console.log(res);
 })
-p.then()
-console.log(p);

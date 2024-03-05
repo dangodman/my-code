@@ -14,8 +14,20 @@
 2. promise: 
    1. 维护了一个状态，state，值为: pending fulfilled rejected, 目的是上promise的状态一经改变，无法再次修改，也就保证了 then和catch不可能同时触发
    2. 内部的resolve函数会修改state为fulfilled，并触发then中的回调
-3. then:
-  1. 默认 返回一个promise对象，状态为fulfilled
-  2. 当then前面的promise状态为fulfilled，then中的回调直接执行
-     当then前面的promise状态为rejected，then中的第二个回调直接执行
-     当then前面的promise状态为pending，then中的回调需要被缓存起来交给resolve或者reject执行
+  3. then:
+    1. 默认 返回一个promise对象，状态为fulfilled
+    2. 当then前面的promise状态为fulfilled，then中的回调直接执行
+       当then前面的promise状态为rejected，then中的第二个回调直接执行
+       当then前面的promise状态为pending，then中的回调需要被缓存起来交给resolve或者reject执行
+
+3. generator
+  1. 可以分段执行, 可以暂停
+  2. 可以控制每个阶段的返回值
+  3. 可以知道是否执行完毕
+  4. 可以借助 Thunk 和co模块 处理异步，但是写法复杂，所以generator函数的意义其实是为了打造 async await
+
+
+4. async/await
+    1. es6提供的一种新的处理异步代码的方案
+    2. 没有错误捕获机制
+    3. async/await 是由promise + generator 来实现的，本质是在generator的基础上通过递归的方式来自动执行一个又一个的next函数，当done为true时，结束递归
