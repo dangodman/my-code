@@ -70,13 +70,23 @@ https://192.168.31.45:8080/user
 
   http://192.168.31.2:8080 (后端go)
 
-  1. JSONP  -- 借助script标签上的src属性不受同源策略的影响这一机制，来实现跨域
-   - ajax请求受同源策略的影响，但是<script>上的src属性不受同源策略的影响，且该属性也会导致浏览器发送一个请求
+1. JSONP  -- 借助script标签上的src属性不受同源策略的影响这一机制，来实现跨域
+  - ajax请求受同源策略的影响，但是<script>上的src属性不受同源策略的影响，且该属性也会导致浏览器发送一个请求
 
-   原理：
-     1. 借助script的src属性给后端发送一个请求，且携带一个参数('callback')
-     2. 前端在window对象上添加了一个callback函数
-     3. 后端接受到这个 'callback' 后，将要返回给前端的数据data和这个参数callback进行拼接成callback(data),并返回
-     4. 因为window上已经有一个callback函数，后端又返回了一个形如callback(data)，浏览器会将该字符串执行成callback的调用
+  原理：
+    1. 借助script的src属性给后端发送一个请求，且携带一个参数('callback')
+    2. 前端在window对象上添加了一个callback函数
+    3. 后端接受到这个 'callback' 后，将要返回给前端的数据data和这个参数callback进行拼接成callback(data),并返回
+    4. 因为window上已经有一个callback函数，后端又返回了一个形如callback(data)，浏览器会将该字符串执行成callback的调用
      
-   缺点：1. 必须要后端配合 2. 只能用于get请求
+  缺点：1. 必须要后端配合 2. 只能用于get请求
+  
+2. Cors (Cross-Origin Resource Sharing)  --- 后端通过设置响应头来告诉浏览器不要拒绝接收后端的响应
+
+3. node代理 (vite 开发环境下生效)
+
+4. nginx代理 (类似Cors，配置白名单) (生产环境)
+
+5. domain (在iframe中，当父级页面和子级页面的子域不同时，通过设置document.domain='xx' 来将xx定为基础域，从而实现跨域)
+
+6. postMesage (在iframe中)
