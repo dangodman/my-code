@@ -8,5 +8,6 @@
     - 可以充当componentDidUpdate()
     - 可以充当componentWillUnmount()
 
-
+3. useRef  在函数组件中获取dom结构
+4. useContext  createContext创建一个上下文对象，用于父组件提供数据，子组件通过useContext(context)来接收数据
     
