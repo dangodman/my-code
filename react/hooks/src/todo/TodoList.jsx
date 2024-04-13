@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useRef} from 'react';
 import TotoItem from './TodoItem'
 import { Input, Button } from 'antd';
 
@@ -12,24 +12,19 @@ const TodoList = () => {
     'Los Angeles battles huge wildfires.',
   ];
   const [dataList,setData] = useState(data)
-  const [ipt, setIpt] = useState('');
-  const changeIpt = (e) => {
-    setIpt(e.target.value)
-  }
+  const ipt = useRef(null)
   const Submit = () => {
-    if(ipt.trim() === ''){
-      return
-    }
-    setData([...dataList,ipt.trim()])
+    setData([...dataList,ipt.current.input.value])
+    console.log(ipt)
   }
-  const fn = (val) =>{
-    setData(dataList.filter((item) => item !==val))
+  const fn = (i) =>{
+    setData(dataList.filter((item,index) => index != i))
   }
   return (
     <div style={{width: '400px'}}>
 
       <header style={{display: 'flex'}}>
-        <Input placeholder="Basic usage" value={ipt} onChange={(e) => changeIpt(e)} />
+        <Input placeholder="Basic usage" ref={ipt} />
         <Button onClick={() => Submit()}>提交</Button>
       </header>
 
